@@ -45,12 +45,6 @@ class local_class definition create public.
 
   private section.
 
-    methods unidades
-      importing
-        !arabico type num10
-      exporting
-        !romano  type char20 .
-
     methods converter
       importing
         !arabico  type num10
@@ -58,34 +52,12 @@ class local_class definition create public.
       exporting
         !romano   type char20 .
 
-    methods set4
-      importing
-        !velho type char1
-      exporting
-        !novo  type char2 .
-
-    methods set0
-      importing
-        !velho type char1
-      exporting
-        !novo  type char2 .
-
 endclass.
 
 class local_class implementation.
 
   method constructor .
 
-*    referencia =
-*      value #(
-*        ( numero = 'I' anterior = ''  proximo = 'V' ) " 1
-*        ( numero = 'V' anterior = 'I' proximo = 'X' ) " 5
-*        ( numero = 'X' anterior = 'V' proximo = 'L' ) " 10
-*        ( numero = 'L' anterior = 'X' proximo = 'C' ) " 50
-*        ( numero = 'C' anterior = 'L' proximo = 'C' ) " 100
-*        ( numero = 'D' anterior = 'C' proximo = 'M' ) " 500
-*        ( numero = 'M' anterior = 'D' proximo = '?' ) " 1000
-*      ).
     referencia =
       value #(
         ( arabico = 1     numero = 'I' anterior = ''  proximo = 'V' )
@@ -116,58 +88,10 @@ class local_class implementation.
     do .
 
       data(controle) = 10 ** sy-index .
-
-
-      data(divisao) = arabico div controle .
-      saldo_divisao = arabico mod controle .
+      data(divisao)  = arabico div controle .
+      saldo_divisao  = arabico mod controle .
 
       superior = controle / 10 .
-
-*      case sy-index.
-*
-*        when 1 .
-*
-*          me->converter(
-*            exporting
-*              arabico  = saldo_divisao
-*              superior = 1
-*            importing
-*              romano   = unidades
-*          ).
-*
-*        when 2 .
-*
-*          me->converter(
-*            exporting
-*              arabico  = saldo_divisao
-*              superior = 10
-*            importing
-*              romano   = dezenas
-*          ).
-*
-*        when 3 .
-*
-*          me->converter(
-*            exporting
-*              arabico  = saldo_divisao
-*              superior = 100
-*            importing
-*              romano   = centenas
-*          ).
-*
-*        when 3 .
-*
-*          me->converter(
-*            exporting
-*              arabico  = saldo_divisao
-*              superior = 1000
-*            importing
-*              romano   = centenas
-*          ).
-*
-*        when others .
-*          exit .
-*      endcase .
 
       if superior eq 0 .
 
@@ -226,90 +150,6 @@ class local_class implementation.
   endmethod.
 
 
-  method unidades .
-
-    data: contador type i,
-          novo     type char2,
-          velho    type char1.
-
-
-    do arabico times .
-
-*     Percorre os numeros para preenchimento
-      contador = contador + 1 .
-
-      try.
-          data(divisao) = contador div 5 .
-        catch cx_sy_zerodivide .
-      endtry.
-
-      try.
-          data(saldo_divisao) = contador mod 5 .
-        catch cx_sy_zerodivide .
-      endtry.
-
-      case divisao.
-
-        when 0 .
-
-          case saldo_divisao .
-
-            when 4 .
-              me->set4(
-                exporting
-                  velho = romano(1)
-                importing
-                  novo  = novo
-              ).
-
-              romano = novo .
-
-
-            when others .
-              concatenate romano 'I' into romano .
-              condense romano no-gaps .
-
-          endcase.
-
-        when 4 .
-
-        when others .
-
-          case saldo_divisao .
-
-            when 0 .
-              velho = romano(2) .
-              me->set0(
-                exporting
-                  velho = velho
-                importing
-                  novo  = novo
-              ).
-
-              romano = novo .
-
-            when 4 .
-              me->set4(
-                exporting
-                  velho = romano(1)
-                importing
-                  novo  = novo
-              ).
-
-              romano = novo .
-
-            when others .
-              concatenate romano 'I' into romano .
-              condense romano no-gaps .
-
-          endcase.
-
-      endcase .
-
-    enddo.
-
-  endmethod.
-
   method converter .
 
     data:
@@ -338,12 +178,12 @@ class local_class implementation.
           case saldo_divisao .
 
             when 4 .
+
               controle = ( sy-index + 1 ) * superior .
 
               read table referencia into data(line)
                 with key arabico = controle .
               if sy-subrc eq 0 .
-*               concatenate line-anterior line-numero into romano .
                 romano = line-numero .
               endif .
 
@@ -411,50 +251,7 @@ class local_class implementation.
   endmethod.
 
 
-  method set4 .
-
-    read table referencia into data(line)
-*     with table key numero = velho .
-      with key numero = velho .
-
-    if sy-subrc eq 0 .
-
-      if line-anterior is initial .
-
-        concatenate velho line-proximo
-               into novo .
-
-      else.
-
-        concatenate line-anterior line-proximo
-               into novo .
-
-      endif .
-
-    endif .
-
-  endmethod.
-
-  method set0 .
-
-    read table referencia into data(line)
-*     with table key numero = velho .
-      with key numero = velho .
-
-    if sy-subrc eq 0 .
-
-      if line-anterior is initial .
-
-        novo = line-proximo .
-
-      endif .
-
-    endif .
-
-  endmethod.
-
 endclass.
-
 
 
 data:
@@ -467,43 +264,6 @@ start-of-selection .
 
   create object report .
 
-*
-*  do 10 times .
-*
-*    arabico = sy-index .
-*    data(line) =
-*      value local_class=>ty_out( arabico = arabico
-*                                 romano  = report->romanos( arabico = arabico ) ) .
-*    append line to out .
-*    clear  line .
-*
-*  enddo .
-*
-*  do 10 times .
-*
-*    arabico = sy-index * 10  .
-*
-*    line =
-*      value local_class=>ty_out( arabico = arabico
-*                                 romano  = report->romanos( arabico = arabico ) ) .
-*    append line to out .
-*    clear  line .
-*
-*  enddo .
-*
-*
-*  do 10 times .
-*
-*    arabico = sy-index * 100  .
-*
-*    line =
-*      value local_class=>ty_out( arabico = arabico
-*                                 romano  = report->romanos( arabico = arabico ) ) .
-*    append line to out .
-*    clear  line .
-*
-*  enddo .
-*
 
   do 1000 times .
 
