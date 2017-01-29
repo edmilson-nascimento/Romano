@@ -106,43 +106,43 @@ class local_class implementation.
       unidades type char10,
       dezenas  type char10,
       centenas type char10.
-*
-**   unidade
-*    me->converter(
-*      exporting
-*        arabico  = arabico
-*        superior = 1
-*      importing
-*        romano   = unidades
-*    ).
-*
-**   dezenas
-*    me->converter(
-*      exporting
-*        arabico  = arabico
-*        superior = 10
-*      importing
-*        romano   = dezenas
-*    ).
-*
-**   Centenas
-*    me->converter(
-*      exporting
-*        arabico  = arabico
-*        superior = 100
-*      importing
-*        romano   = centenas
-*    ).
-*
-*
-*    concatenate centenas dezenas unidades into romano .
 
-    
-    do .
-    
-    controle = arabico 
-    
-    enddo .
+*   unidade
+    me->converter(
+      exporting
+        arabico  = arabico
+        superior = 1
+      importing
+        romano   = unidades
+    ).
+
+*   dezenas
+    me->converter(
+      exporting
+        arabico  = arabico
+        superior = 10
+      importing
+        romano   = dezenas
+    ).
+
+*   Centenas
+    me->converter(
+      exporting
+        arabico  = arabico
+        superior = 100
+      importing
+        romano   = centenas
+    ).
+
+
+    concatenate centenas dezenas unidades into romano .
+
+
+*    do .
+*
+*    controle = arabico
+*
+*    enddo .
 
   endmethod.
 
@@ -419,48 +419,10 @@ start-of-selection .
 
   create object report .
 
-*
-*  do 10 times .
-*
-*    arabico = sy-index .
-*    data(line) =
-*      value local_class=>ty_out( arabico = arabico
-*                                 romano  = report->romanos( arabico = arabico ) ) .
-*    append line to out .
-*    clear  line .
-*
-*  enddo .
-*
-*  do 10 times .
-*
-*    arabico = sy-index * 10  .
-*
-*    line =
-*      value local_class=>ty_out( arabico = arabico
-*                                 romano  = report->romanos( arabico = arabico ) ) .
-*    append line to out .
-*    clear  line .
-*
-*  enddo .
-*
-*
-*  do 10 times .
-*
-*    arabico = sy-index * 100  .
-*
-*    line =
-*      value local_class=>ty_out( arabico = arabico
-*                                 romano  = report->romanos( arabico = arabico ) ) .
-*    append line to out .
-*    clear  line .
-*
-*  enddo .
 
-
-  do 1000 times .
+  do 10 times .
 
     arabico = sy-index .
-
     data(line) =
       value local_class=>ty_out( arabico = arabico
                                  romano  = report->romanos( arabico = arabico ) ) .
@@ -469,6 +431,44 @@ start-of-selection .
 
   enddo .
 
+  do 10 times .
+
+    arabico = sy-index * 10  .
+
+    line =
+      value local_class=>ty_out( arabico = arabico
+                                 romano  = report->romanos( arabico = arabico ) ) .
+    append line to out .
+    clear  line .
+
+  enddo .
+
+
+  do 10 times .
+
+    arabico = sy-index * 100  .
+
+    line =
+      value local_class=>ty_out( arabico = arabico
+                                 romano  = report->romanos( arabico = arabico ) ) .
+    append line to out .
+    clear  line .
+
+  enddo .
+
+
+*  do 1000 times .
+*
+*    arabico = sy-index .
+*
+*    data(line) =
+*      value local_class=>ty_out( arabico = arabico
+*                                 romano  = report->romanos( arabico = arabico ) ) .
+*    append line to out .
+*    clear  line .
+*
+*  enddo .
+*
 
   report->exibir(
     changing
