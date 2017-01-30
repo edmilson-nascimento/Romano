@@ -13,7 +13,7 @@ class local_class definition create public.
     types:
       begin of ty_referencia,
         arabico  type numc10,
-        numero   type char1,
+        romano   type char1,
         anterior type char1,
         proximo  type char1,
       end of ty_referencia,
@@ -67,13 +67,13 @@ class local_class implementation.
 
     referencia =
       value #(
-        ( arabico = 1     numero = 'I' )
-        ( arabico = 5     numero = 'V' )
-        ( arabico = 10    numero = 'X' )
-        ( arabico = 50    numero = 'L' )
-        ( arabico = 100   numero = 'C' )
-        ( arabico = 500   numero = 'D' )
-        ( arabico = 1000  numero = 'M' )
+        ( arabico = 1     romano = 'I' )
+        ( arabico = 5     romano = 'V' )
+        ( arabico = 10    romano = 'X' )
+        ( arabico = 50    romano = 'L' )
+        ( arabico = 100   romano = 'C' )
+        ( arabico = 500   romano = 'D' )
+        ( arabico = 1000  romano = 'M' )
       ) .
 
     loop at referencia assigning field-symbol(<line>) .
@@ -82,14 +82,14 @@ class local_class implementation.
       data(index) = sy-tabix - 1 .
       read table referencia into data(line) index index .
       if sy-subrc eq 0 .
-        <line>-anterior = line-numero .
+        <line>-anterior = line-romano .
       endif .
 
 *     Próximo item
       index = index + 2 .
       read table referencia into line index index .
       if sy-subrc eq 0 .
-        <line>-proximo = line-numero .
+        <line>-proximo = line-romano .
       endif .
 
     endloop.
@@ -165,7 +165,7 @@ class local_class implementation.
 
 
       read table referencia into data(line)
-        with key numero = caracter .
+        with key romano = caracter .
 
       if sy-subrc eq 0 .
 
@@ -177,7 +177,7 @@ class local_class implementation.
         else .
 
           read table referencia into data(line_prox)
-            with key numero = proximo .
+            with key romano = proximo .
 
           if sy-subrc eq 0 .
 
@@ -269,13 +269,13 @@ class local_class implementation.
               read table referencia into data(line)
                 with key arabico = controle .
               if sy-subrc eq 0 .
-                romano = line-numero .
+                romano = line-romano .
               endif .
 
               read table referencia into line
                 with key arabico = superior .
               if sy-subrc eq 0 .
-                concatenate line-numero romano into romano .
+                concatenate line-romano romano into romano .
               endif .
 
 
@@ -284,7 +284,7 @@ class local_class implementation.
               controle  = sy-index * superior .
               read table referencia into line
                 with key arabico = controle .
-              concatenate romano line-numero into romano .
+              concatenate romano line-romano into romano .
               condense romano no-gaps .
 
           endcase.
@@ -299,7 +299,7 @@ class local_class implementation.
               read table referencia into line
                 with key arabico = contador .
               if sy-subrc eq 0 .
-                romano = line-numero .
+                romano = line-romano .
               endif .
 
             when 4 .
@@ -309,13 +309,13 @@ class local_class implementation.
               read table referencia into line
                 with key arabico = contador .
               if sy-subrc eq 0 .
-                romano = line-numero .
+                romano = line-romano .
               endif .
 
               read table referencia into line
                 with key arabico = superior .
               if sy-subrc eq 0 .
-                concatenate line-numero romano into romano .
+                concatenate line-romano romano into romano .
               endif .
 
             when others .
@@ -323,7 +323,7 @@ class local_class implementation.
               read table referencia into line
                 with key arabico = superior .
               if sy-subrc eq 0 .
-                concatenate romano line-numero into romano .
+                concatenate romano line-romano into romano .
                 condense romano no-gaps .
               endif .
 
@@ -344,27 +344,41 @@ data:
   arabico type num10,
   out     type local_class=>out_t.
 
+parameters: numero type numc10,
+            romano type char20.
+
 
 start-of-selection .
 
   create object report .
 
+*  do 1000 times .
+*
+*    arabico = sy-index .
+*
+*    data(line) =
+*      value local_class=>ty_out( numero  = arabico
+*                                 romano  = report->romanos( arabico = arabico )
+*                                 arabico = report->arabicos( romano = report->romanos( arabico = arabico ) ) ) .
+*    append line to out .
+*    clear  line .
+*
+*  enddo .
+*
+*
+*  report->exibir(
+*    changing
+*      out = out
+*  ).
 
-  do 1000 times .
+  if numero is not initial .
 
-    arabico = sy-index .
+    write: / 'Arabico: ', numero, 'Romano: ', report->romanos( arabico = numero ).
 
-    data(line) =
-      value local_class=>ty_out( numero  = arabico
-                                 romano  = report->romanos( arabico = arabico )
-                                 arabico = report->arabicos( romano = report->romanos( arabico = arabico ) ) ) .
-    append line to out .
-    clear  line .
+  endif .
 
-  enddo .
+  if romano is not initial .
 
+    write: / 'Romano: ', romano, 'Arabico: ', report->arabicos( romano = romano ) .
 
-  report->exibir(
-    changing
-      out = out
-  ).
+  endif .
