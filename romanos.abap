@@ -19,8 +19,9 @@ class local_class definition create public.
       end of ty_referencia,
 
       begin of ty_out,
-        arabico type numc10,
+        numero  type numc10,
         romano  type char20,
+        arabico type char20,
       end of ty_out,
 
       out_t type table of ty_out.
@@ -35,6 +36,12 @@ class local_class definition create public.
         !arabico      type num10
       returning
         value(romano) type char20 .
+
+    methods arabicos
+      importing
+        !romano        type char20
+      returning
+        value(arabico) type numc10 .
 
     methods exibir
       changing
@@ -117,6 +124,66 @@ class local_class implementation.
     enddo .
 
   endmethod.
+
+  method arabicos .
+
+    data(converte) = romano .
+
+    clear arabico .
+
+    do .
+
+      data(posicao) = sy-index - 1 .
+
+      data(caracter) = converte+posicao(1) .
+
+      posicao = posicao + 1 .
+
+      data(proximo)  = converte+posicao(1) .
+
+      if caracter is initial .
+        exit .
+      endif .
+
+
+      read table referencia into data(line)
+        with key numero = caracter .
+
+      if sy-subrc eq 0 .
+
+*       Verificando se o proximo caracter é maior
+        if proximo is initial .
+
+          arabico = arabico + line-arabico .
+
+        else .
+
+          read table referencia into data(line_prox)
+            with key numero = proximo .
+
+          if sy-subrc eq 0 .
+
+            if line-arabico lt line_prox-arabico .
+
+              arabico = arabico + ( line_prox-arabico - line-arabico ) .
+              clear converte+posicao(1) .
+              condense converte no-gaps .
+
+            else .
+
+              arabico = arabico + line-arabico .
+
+            endif .
+
+          endif .
+
+        endif .
+
+      endif.
+
+    enddo.
+
+  endmethod .
 
 
   method exibir .
@@ -270,8 +337,9 @@ start-of-selection .
     arabico = sy-index .
 
     data(line) =
-      value local_class=>ty_out( arabico = arabico
-                                 romano  = report->romanos( arabico = arabico ) ) .
+      value local_class=>ty_out( numero  = arabico
+                                 romano  = report->romanos( arabico = arabico )
+                                 arabico = report->arabicos( romano = report->romanos( arabico = arabico ) ) ) .
     append line to out .
     clear  line .
 
