@@ -67,14 +67,32 @@ class local_class implementation.
 
     referencia =
       value #(
-        ( arabico = 1     numero = 'I' anterior = ''  proximo = 'V' )
-        ( arabico = 5     numero = 'V' anterior = 'I' proximo = 'X' )
-        ( arabico = 10    numero = 'X' anterior = 'V' proximo = 'L' )
-        ( arabico = 50    numero = 'L' anterior = 'X' proximo = 'C' )
-        ( arabico = 100   numero = 'C' anterior = 'L' proximo = 'C' )
-        ( arabico = 500   numero = 'D' anterior = 'C' proximo = 'M' )
-        ( arabico = 1000  numero = 'M' anterior = 'D' proximo = '?' )
+        ( arabico = 1     numero = 'I' )
+        ( arabico = 5     numero = 'V' )
+        ( arabico = 10    numero = 'X' )
+        ( arabico = 50    numero = 'L' )
+        ( arabico = 100   numero = 'C' )
+        ( arabico = 500   numero = 'D' )
+        ( arabico = 1000  numero = 'M' )
       ) .
+
+    loop at referencia assigning field-symbol(<line>) .
+
+*     Item anterior
+      data(index) = sy-tabix - 1 .
+      read table referencia into data(line) index index .
+      if sy-subrc eq 0 .
+        <line>-anterior = line-numero .
+      endif .
+
+*     Próximo item
+      index = index + 2 .
+      read table referencia into line index index .
+      if sy-subrc eq 0 .
+        <line>-proximo = line-numero .
+      endif .
+
+    endloop.
 
 
   endmethod.
