@@ -1,8 +1,4 @@
-*&---------------------------------------------------------------------*
-*& Report y_romano
-*&---------------------------------------------------------------------*
-*&
-*&---------------------------------------------------------------------*
+
 report y_romano.
 
 class local_class definition create public.
@@ -222,7 +218,7 @@ class local_class implementation.
               r_salv_table = table
             changing
               t_table      = out
-                             ).
+           ).
 
         catch cx_salv_msg .
 
