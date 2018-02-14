@@ -1,4 +1,4 @@
-# Romano
+# Conversão de Arábico x Romano ou Romano x Arábico #
 Afim de atender a necessidade de uma entrevista, foi preciso que eu fizesse um programa que "_... faça conversão de números arábicos para números romanos e o contrário. O Programa não precisa ter nada de especial, apenas uma tela com um input que o usuário insere somente números e alguma forma para escolher qual a conversão que deverá acontecer, Arábico x Romano ou Romano x Arábico_". ~Infelizmente não passei na entrevista devido a uma divergência de aplicação de técnica ABAP em Tabelas Internas~ Como eu fiquei contente com meu código, resolvi deixar disponível. Para este, é usada uma tabela de referência com o valor correspondente de cada número onde podem ser adicionados mais opções.
 
 O intuito principal foi fazer a conversão sem que fosse utilizada alguma rotina já existente. Eu não pretendia _colocar em check_ o melhor algoritmo para conversão, mas sim, mostrar a minha habilidade de criar um algoritmo assim.
