@@ -37,5 +37,5 @@ Afim de atender a necessidade de uma entrevista, foi preciso que eu fizesse um p
 ```
 
 O intuito principal foi fazer a conversão sem que fosse utilizada alguma rotina já existente. Eu não pretendia _colocar em check_ o melhor algoritmo para conversão, mas sim, mostrar a minha habilidade de criar um algoritmo assim.
-
+ 
 Poderia ter feito com uma melhor arquitetura respeitando melhor _SRP — O Princípio da Responsabilidade Única_, e possivelmente vou melhorar usando esse conceito ~~quando tiver tempo e um ambiente descente~~.
