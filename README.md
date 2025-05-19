@@ -1,11 +1,24 @@
-# Conversão de Arábico x Romano ou Romano x Arábico #
+# Conversor de Números Arábicos x Romanos #
 
 ![ABAP](https://img.shields.io/badge/ABAP-0061AF?style=flat&logo=sap&logoColor=white)
 ![SAP](https://img.shields.io/badge/SAP-0FAAFF?style=flat&logo=sap&logoColor=white)
 ![Development](https://img.shields.io/badge/development-abap-blue?style=flat&logo=sap)
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
+
+## 📋 Sobre o Projeto
+
+Desenvolvimento de um programa ABAP para conversão bidirecional entre números arábicos e romanos. O programa oferece:
+- Conversão de números arábicos para romanos
+- Conversão de números romanos para arábicos
+- Interface simples com campo de entrada
+- Opção de escolha do tipo de conversão
+
+## 🛠️ Tecnologias
 
 ![Eclipse](https://img.shields.io/badge/Eclipse%20ADT-2C2255?style=flat&logo=eclipse&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)
+
+## 📊 Status do Projeto
 
 ![Commits](https://img.shields.io/github/commit-activity/m/edmilson-nascimento/Romano)
 ![Last Commit](https://img.shields.io/github/last-commit/edmilson-nascimento/Romano)
@@ -13,11 +26,9 @@
 ![Pull Requests](https://img.shields.io/github/issues-pr/edmilson-nascimento/Romano)
 ![Repository Size](https://img.shields.io/github/repo-size/edmilson-nascimento/Romano)
 
-A fim de atender a necessidade de uma entrevista, foi preciso que eu fizesse um programa que "_... faça conversão de números arábicos para números romanos e o contrário. O Programa não precisa ter nada de especial, apenas uma tela com um input que o usuário insere somente números e alguma forma para escolher qual a conversão que deverá acontecer, Arábico x Romano ou Romano x Arábico_". 
+## 💻 Implementação
 
-~Infelizmente não passei na entrevista devido a uma divergência de aplicação de técnica ABAP em Tabelas Internas, que eu ainda insisto que a pessoa que me entrevistou estava um pouco desatenta aos seus próprios códigos~.
-
-Como eu fiquei contente com meu código, resolvi deixar disponível. Para este, é usada uma tabela de referência com o valor correspondente de cada número onde podem ser adicionadas mais opções. Esta ação é feita no método `constructor` .
+O programa utiliza uma tabela de referência com valores correspondentes para cada número. A implementação é feita através do método `constructor`:
 
 ```abap
   method constructor .
@@ -52,6 +63,12 @@ Como eu fiquei contente com meu código, resolvi deixar disponível. Para este, 
     endloop.
 ```
 
-O intuito principal foi fazer a conversão sem que fosse utilizada alguma rotina já existente. Eu não pretendia _colocar em check_ o melhor algoritmo para conversão, mas sim, mostrar a minha habilidade de criar um algoritmo assim.
- 
-Poderia ter feito com uma melhor arquitetura respeitando melhor _SRP — O Princípio da Responsabilidade Única_, e possivelmente vou melhorar usando esse conceito ~~quando tiver tempo e um ambiente decente~~.
+## 🎯 Objetivo
+
+O objetivo principal foi desenvolver um algoritmo próprio para conversão, sem utilizar rotinas existentes, demonstrando a capacidade de criar soluções personalizadas.
+
+## 📝 Notas de Desenvolvimento
+
+- Implementação inicial focada na funcionalidade básica
+- Possibilidade de melhorias futuras aplicando o _SRP — Princípio da Responsabilidade Única_
+- Código desenvolvido originalmente para uma entrevista técnica
