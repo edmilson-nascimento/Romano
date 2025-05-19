@@ -66,6 +66,7 @@ O programa utiliza uma tabela de referência com valores correspondentes para ca
 ## 🎯 Objetivo
 
 O objetivo principal foi desenvolver um algoritmo próprio para conversão, sem utilizar rotinas existentes, demonstrando a capacidade de criar soluções personalizadas.
+~Infelizmente não passei na entrevista devido a uma divergência de aplicação de técnica ABAP em Tabelas Internas, que eu ainda insisto que a pessoa que me entrevistou estava um pouco desatenta aos seus próprios códigos.~
 
 ## 📝 Notas de Desenvolvimento
 
