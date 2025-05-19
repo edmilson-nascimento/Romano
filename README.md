@@ -1,10 +1,12 @@
 # Conversão de Arábico x Romano ou Romano x Arábico #
 
 ![ABAP](https://img.shields.io/badge/ABAP-0061AF?style=for-the-badge&logo=sap&logoColor=white)
+![ABAP](https://img.shields.io/badge/ABAP-0A9EDC?style=flat&logo=sap&logoColor=white)
 ![SAP](https://img.shields.io/badge/SAP-0FAAFF?style=for-the-badge&logo=sap&logoColor=white)
+![SAP](https://img.shields.io/badge/SAP-000000?style=flat&logo=sap&logoColor=white)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
-![Eclipse](https://img.shields.io/badge/Eclipse%20ADT-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
+![Eclipse](https://img.shields.io/badge/Eclipse%20ADT-2C2255?style=flat&logo=eclipse&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 ![Commits](https://img.shields.io/github/commit-activity/m/EdmilsonNascimento/Romano)
 ![Last Commit](https://img.shields.io/github/last-commit/EdmilsonNascimento/Romano)
