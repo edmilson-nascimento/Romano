@@ -1,6 +1,10 @@
 # Conversão de Arábico x Romano ou Romano x Arábico #
 
-[![N|Solid](https://wiki.scn.sap.com/wiki/download/attachments/1710/ABAP%20Development.png?version=1&modificationDate=1446673897000&api=v2)](https://www.sap.com/brazil/developer.html)
+![ABAP](https://img.shields.io/badge/ABAP-0061AF?style=for-the-badge&logo=sap&logoColor=white)
+![SAP](https://img.shields.io/badge/SAP-0FAAFF?style=for-the-badge&logo=sap&logoColor=white)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
+
 Afim de atender a necessidade de uma entrevista, foi preciso que eu fizesse um programa que "_... faça conversão de números arábicos para números romanos e o contrário. O Programa não precisa ter nada de especial, apenas uma tela com um input que o usuário insere somente números e alguma forma para escolher qual a conversão que deverá acontecer, Arábico x Romano ou Romano x Arábico_". ~Infelizmente não passei na entrevista devido a uma divergência de aplicação de técnica ABAP em Tabelas Internas, que eu ainda insisto que a pessoa que me entrevistou estava um pouco desatenta aos seus próprios códigos~. Como eu fiquei contente com meu código, resolvi deixar disponível. Para este, é usada uma tabela de referência com o valor correspondente de cada número onde podem ser adicionados mais opções. Esta ação é feita no método `constructor` .
 
 ```abap
